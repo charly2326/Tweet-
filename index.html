@@ -254,7 +254,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            width: 350px;
+            width: 400px;
             text-align: center;
             position: relative;
         }
@@ -290,6 +290,53 @@
         .profile-bio {
             margin-top: 10px;
             font-size: 14px;
+        }
+
+        .follow-btn {
+            background-color: #1da1f2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .stats div {
+            text-align: center;
+        }
+
+        .stats div span {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .timeline {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .timeline h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .timeline-item {
+            background: #f5f8fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .timeline-item p {
+            margin: 0;
         }
     </style>
 </head>
@@ -360,11 +407,39 @@
             <div class="profile-name" id="nombrePerfil">Nombre del Usuario</div>
             <div class="profile-username" id="usuarioPerfil">@usuario</div>
             <p class="profile-bio" id="bioPerfil">Esta es la biografía del usuario.</p>
+            <button class="follow-btn" onclick="toggleFollow()">Seguir</button>
+            <div class="stats">
+                <div>
+                    <span id="tweetsCount">123</span>
+                    Tweets
+                </div>
+                <div>
+                    <span id="followingCount">456</span>
+                    Siguiendo
+                </div>
+                <div>
+                    <span id="followersCount">789</span>
+                    Seguidores
+                </div>
+            </div>
+            <div class="timeline">
+                <h4>Timeline</h4>
+                <div class="timeline-item">
+                    <p>Primer Tweet</p>
+                </div>
+                <div class="timeline-item">
+                    <p>Segundo Tweet</p>
+                </div>
+                <!-- Otros tweets pueden ser añadidos aquí -->
+            </div>
         </div>
     </div>
 
     <!-- Script para manejar el modal -->
     <script>
+        // Variables para seguimiento del estado de seguimiento
+        let isFollowing = false;
+
         // Función para mostrar la vista previa de los archivos seleccionados
         function previewFiles() {
             const fileInput = document.getElementById('fileInput');
@@ -515,6 +590,14 @@
         function openUserProfile(username) {
             document.getElementById("perfilModal").style.display = "flex";
             document.getElementById("usuarioPerfil").innerText = username;
+        }
+
+        // Función para seguir/dejar de seguir al usuario
+        function toggleFollow() {
+            const followBtn = document.querySelector('.follow-btn');
+            isFollowing = !isFollowing;
+            followBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
+            followBtn.style.backgroundColor = isFollowing ? 'gray' : '#1da1f2';
         }
     </script>
 </body>
