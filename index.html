@@ -436,169 +436,184 @@
     </div>
 
     <!-- Script para manejar el modal -->
-    <script>
-        // Variables para seguimiento del estado de seguimiento
-        let isFollowing = false;
+   <script>
+    // Variables para seguimiento del estado de seguimiento
+    let isFollowing = false;
+    const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual
 
-        // Función para mostrar la vista previa de los archivos seleccionados
-        function previewFiles() {
-            const fileInput = document.getElementById('fileInput');
-            const previewContainer = document.getElementById('filePreview');
-            
-            previewContainer.innerHTML = ''; // Limpiar vista previa anterior
-            
-            const files = fileInput.files;
-            
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const fileType = file.type.split('/')[0]; // Tipo de archivo (imagen, video, etc.)
-                
-                const fileElement = document.createElement('div');
-                fileElement.classList.add('file-preview-item');
-                
-                if (fileType === 'image') {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    fileElement.appendChild(img);
-                } else if (fileType === 'video') {
-                    const video = document.createElement('video');
-                    video.src = URL.createObjectURL(file);
-                    video.controls = true;
-                    fileElement.appendChild(video);
-                }
-                
-                previewContainer.appendChild(fileElement);
+    // Función para mostrar la vista previa de los archivos seleccionados
+    function previewFiles() {
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('filePreview');
+
+        previewContainer.innerHTML = ''; // Limpiar vista previa anterior
+
+        const files = fileInput.files;
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const fileType = file.type.split('/')[0]; // Tipo de archivo (imagen, video, etc.)
+
+            const fileElement = document.createElement('div');
+            fileElement.classList.add('file-preview-item');
+
+            if (fileType === 'image') {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                fileElement.appendChild(img);
+            } else if (fileType === 'video') {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.controls = true;
+                fileElement.appendChild(video);
             }
+
+            previewContainer.appendChild(fileElement);
+        }
+    }
+
+    // Publicar un Tweet con validación
+    function publicar() {
+        let input = document.getElementById("postText").value.trim();
+        if (input === "") {
+            alert("¡El post no puede estar vacío!");
+            return;
         }
 
-        // Publicar un Tweet con validación
-        function publicar() {
-            let input = document.getElementById("postText").value.trim();
-            if (input === "") {
-                alert("¡El post no puede estar vacío!");
-                return;
-            }
+        let feed = document.querySelector(".feed");
+        let newPost = document.createElement("div");
+        newPost.classList.add("post");
 
-            let feed = document.querySelector(".feed");
-            let newPost = document.createElement("div");
-            newPost.classList.add("post");
-
-            // Crear el contenido del post
-            let postContent = `
-                <div class="post-header">
-                    <div class="avatar" style="background-image: url('avatar.jpg');"></div>
-                    <h3 onclick="openUserProfile('@usuario')">@usuario</h3>
-                </div>
-                <p>${input}</p>
-            `;
-
-            // Añadir la imagen si hay archivos seleccionados
-            const fileInput = document.getElementById('fileInput');
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const fileType = file.type.split('/')[0]; // Tipo de archivo (imagen, video, etc.)
-                
-                if (fileType === 'image') {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    img.style.width = '100%';
-                    img.style.borderRadius = '10px';
-                    img.style.marginTop = '10px';
-                    postContent += img.outerHTML;
-                } else if (fileType === 'video') {
-                    const video = document.createElement('video');
-                    video.src = URL.createObjectURL(file);
-                    video.controls = true;
-                    video.style.width = '100%';
-                    video.style.borderRadius = '10px';
-                    video.style.marginTop = '10px';
-                    postContent += video.outerHTML;
-                }
-            }
-
-            // Añadir acciones al post
-            postContent += `
-                <div class="post-actions">
-                    <button onclick="toggleComments(this)">💬 Comentar</button>
-                    <button>❤️</button>
-                    <button>📤</button>
-                </div>
-                <div class="comments" style="display: none;">
-                    <div class="add-comment">
-                        <textarea class="comment-input" placeholder="Escribe un comentario..."></textarea>
-                        <button onclick="agregarComentario(this)">Comentar</button>
-                    </div>
-                </div>
-            `;
-
-            newPost.innerHTML = postContent;
-            feed.appendChild(newPost);
-
-            // Limpiar el formulario después de publicar
-            document.getElementById("postText").value = "";
-            document.getElementById("filePreview").innerHTML = "";
-            fileInput.value = ""; // Limpiar el input de archivos
-        }
-
-        // Función para mostrar/ocultar comentarios
-        function toggleComments(button) {
-            const post = button.closest('.post');
-            const commentsSection = post.querySelector('.comments');
-            commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // Función para agregar un comentario
-        function agregarComentario(button) {
-            const commentInput = button.previousElementSibling;
-            const commentText = commentInput.value.trim();
-            if (commentText === "") {
-                alert("¡El comentario no puede estar vacío!");
-                return;
-            }
-
-            const commentsSection = button.closest('.comments');
-            const newComment = document.createElement('div');
-            newComment.classList.add('comment');
-
-            newComment.innerHTML = `
+        // Crear el contenido del post
+        let postContent = `
+            <div class="post-header">
                 <div class="avatar" style="background-image: url('avatar.jpg');"></div>
-                <div class="comment-content">
-                    <h4>@usuario</h4>
-                    <p>${commentText}</p>
-                </div>
-            `;
+                <h3 onclick="openUserProfile('@usuario')">@usuario</h3>
+            </div>
+            <p>${input}</p>
+        `;
 
-            commentsSection.insertBefore(newComment, commentsSection.querySelector('.add-comment'));
+        // Añadir la imagen si hay archivos seleccionados
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const fileType = file.type.split('/')[0]; // Tipo de archivo (imagen, video, etc.)
 
-            // Limpiar el área de texto después de agregar el comentario
-            commentInput.value = "";
-        }
-
-        // Abrir modal de perfil
-        function openProfileModal() {
-            document.getElementById("perfilModal").style.display = "flex";
-        }
-
-        // Cerrar modal de perfil
-        function cerrarModalPerfil(event) {
-            if (event.target.classList.contains('modal') || event.target.classList.contains('close-btn')) {
-                document.getElementById("perfilModal").style.display = "none";
+            if (fileType === 'image') {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.width = '100%';
+                img.style.borderRadius = '10px';
+                img.style.marginTop = '10px';
+                postContent += img.outerHTML;
+            } else if (fileType === 'video') {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.controls = true;
+                video.style.width = '100%';
+                video.style.borderRadius = '10px';
+                video.style.marginTop = '10px';
+                postContent += video.outerHTML;
             }
         }
 
-        // Abrir perfil de usuario
-        function openUserProfile(username) {
-            document.getElementById("perfilModal").style.display = "flex";
-            document.getElementById("usuarioPerfil").innerText = username;
+        // Añadir acciones al post
+        postContent += `
+            <div class="post-actions">
+                <button onclick="toggleComments(this)">💬 Comentar</button>
+                <button>❤️</button>
+                <button>📤</button>
+            </div>
+            <div class="comments" style="display: none;">
+                <div class="add-comment">
+                    <textarea class="comment-input" placeholder="Escribe un comentario..."></textarea>
+                    <button onclick="agregarComentario(this)">Comentar</button>
+                </div>
+            </div>
+        `;
+
+        newPost.innerHTML = postContent;
+        feed.appendChild(newPost);
+
+        // Limpiar el formulario después de publicar
+        document.getElementById("postText").value = "";
+        document.getElementById("filePreview").innerHTML = "";
+        fileInput.value = ""; // Limpiar el input de archivos
+    }
+
+    // Función para mostrar/ocultar comentarios
+    function toggleComments(button) {
+        const post = button.closest('.post');
+        const commentsSection = post.querySelector('.comments');
+        commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Función para agregar un comentario
+    function agregarComentario(button) {
+        const commentInput = button.previousElementSibling;
+        const commentText = commentInput.value.trim();
+        if (commentText === "") {
+            alert("¡El comentario no puede estar vacío!");
+            return;
         }
 
-        // Función para seguir/dejar de seguir al usuario
-        function toggleFollow() {
-            const followBtn = document.querySelector('.follow-btn');
-            isFollowing = !isFollowing;
-            followBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
-            followBtn.style.backgroundColor = isFollowing ? 'gray' : '#1da1f2';
+        const commentsSection = button.closest('.comments');
+        const newComment = document.createElement('div');
+        newComment.classList.add('comment');
+
+        newComment.innerHTML = `
+            <div class="avatar" style="background-image: url('avatar.jpg');"></div>
+            <div class="comment-content">
+                <h4>@usuario</h4>
+                <p>${commentText}</p>
+            </div>
+        `;
+
+        commentsSection.insertBefore(newComment, commentsSection.querySelector('.add-comment'));
+
+        // Limpiar el área de texto después de agregar el comentario
+        commentInput.value = "";
+    }
+
+    // Abrir modal de perfil
+    function openProfileModal() {
+        document.getElementById("perfilModal").style.display = "flex";
+        // Verificar si el perfil es del usuario actual
+        const profileUsername = document.getElementById("usuarioPerfil").innerText;
+        const perfilBtn = document.getElementById("perfilBtn");
+        if (profileUsername === currentUsername) {
+            perfilBtn.textContent = "Editar perfil";
+        } else {
+            perfilBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
         }
-    </script>
+    }
+
+    // Cerrar modal de perfil
+    function cerrarModalPerfil(event) {
+        if (event.target.classList.contains('modal') || event.target.classList.contains('close-btn')) {
+            document.getElementById("perfilModal").style.display = "none";
+        }
+    }
+
+    // Abrir perfil de usuario
+    function openUserProfile(username) {
+        document.getElementById("perfilModal").style.display = "flex";
+        document.getElementById("usuarioPerfil").innerText = username;
+        const perfilBtn = document.getElementById("perfilBtn");
+        if (username === currentUsername) {
+            perfilBtn.textContent = "Editar perfil";
+        } else {
+            perfilBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
+        }
+    }
+
+    // Función para seguir/dejar de seguir al usuario
+    function toggleFollow() {
+        const followBtn = document.querySelector('.follow-btn');
+        isFollowing = !isFollowing;
+        followBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
+        followBtn.style.backgroundColor = isFollowing ? 'gray' : '#1da1f2';
+    }
+</script>
 </body>
 </html>
