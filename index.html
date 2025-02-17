@@ -6,18 +6,14 @@
     <title>Interfaz Mejorada</title>
 <style>
         /* ======== ESTILOS GENERALES ======== */
-        body {
-            font-family: Arial, sans-serif;
+        body {                                                                                                        font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background: #f5f8fa;
+            padding: 0;                                                                                               background: #f5f8fa;
         }
-
-        .container {
+                                                                                                                  .container {
             display: flex;
             max-width: 1200px;
-            margin: auto;
-        }
+            margin: auto;                                                                                         }
 
         /* ======== MENÚ IZQUIERDO ======== */                                                                    .left-menu {
             width: 20%;
@@ -35,8 +31,7 @@
         }
 
         .left-menu button {
-            padding: 10px 20px;
-            background: #1da1f2;
+            padding: 10px 20px;                                                                                       background: #1da1f2;
             color: white;
             border: none;
             cursor: pointer;
@@ -79,8 +74,7 @@
         .post {
             background: white;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            border-radius: 10px;                                                                                      margin-bottom: 20px;
             padding: 15px;
         }
 
@@ -148,8 +142,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
-            width: 150px;
-            margin-top: 10px;
+            width: 150px;                                                                                             margin-top: 10px;
         }
 
         .file-input {
@@ -160,16 +153,14 @@
             margin-top: 10px;
         }
 
-        #filePreview img,
-        #filePreview video {
+        #filePreview img,                                                                                         #filePreview video {
             max-width: 100px;
             margin-right: 10px;
             border-radius: 10px;
         }
 
         /* ======== ESTILOS PARA COMENTARIOS ======== */
-        .comments {
-            margin-top: 10px;
+        .comments {                                                                                                   margin-top: 10px;
             padding: 10px;
             background: #f5f8fa;
             border-radius: 10px;
@@ -186,16 +177,14 @@
             background: #ccc;
             border-radius: 50%;
             margin-right: 10px;
-            background-size: cover;
-            background-position: center;
+            background-size: cover;                                                                                   background-position: center;
         }
 
         .comment-content {
             flex: 1;
         }
 
-        .comment-content h4 {
-            margin: 0;
+        .comment-content h4 {                                                                                         margin: 0;
             font-size: 14px;
             color: #1da1f2;                                                                             }
 
@@ -217,8 +206,7 @@
             font-size: 14px;
         }
 
-        .add-comment button {                                                                               padding: 5px 10px;
-            background: #1da1f2;
+        .add-comment button {                                                                               padding: 5px 10px;                                                                                                  background: #1da1f2;
             color: white;
             border: none;
             cursor: pointer;
@@ -297,8 +285,7 @@
             justify-content: space-around;
             margin-top: 20px;
         }
-
-        .stats div {
+                                                                                                                  .stats div {
             text-align: center;
         }
 
@@ -317,14 +304,11 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
-
-        .timeline-item {
+                                                                                                                  .timeline-item {
             background: #f5f8fa;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 10px;                                                                                            margin-bottom: 10px;
             border-radius: 10px;
-        }
-
+        }                                                                                                 
         .timeline-item p {
             margin: 0;
         }
@@ -337,7 +321,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     font-size: 14px;
-}                                                                                                         
+}
 .modal-content button {
     padding: 10px 20px;                                                                                       background: #1da1f2;
     color: white;
@@ -398,8 +382,7 @@
         <!-- Menú Derecho (Tendencias) -->
         <div class="right-menu">
             <h3>Tendencias</h3>
-            <ul id="trendingList">
-                <li>#Tendencia1</li>
+            <ul id="trendingList">                                                                                        <li>#Tendencia1</li>
                 <li>#Tendencia2</li>
                 <li>#Tendencia3</li>
             </ul>
@@ -444,8 +427,7 @@
 </div>
 <!-- MODAL DE EDICIÓN -->
 <div id="edit-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="cerrarModalPerfil(event)">&times;</span>
+    <div class="modal-content">                                                                                   <span class="close-btn" onclick="cerrarModalPerfil(event)">&times;</span>
         <h2>Editar perfil</h2>
         <label for="editName">Nombre:</label>
         <input type="text" id="editName"><br><br>
@@ -467,16 +449,12 @@
 </div>
 
 <script>
-    // Variables para seguimiento del estado de seguimiento
-    let tweetsCount = 123;        // Número inicial de tweets
+    // Variables para seguimiento del estado de seguimiento                                                   let tweetsCount = 123;        // Número inicial de tweets
     let followersCount = 789;     // Número inicial de seguidores
-    let followingCount = 456;     // Número inicial de seguidos
-    let isFollowing = false;      // Estado de si el usuario sigue o no
-    const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual
-
+    let followingCount = 456;     // Número inicial de seguidos                                               let isFollowing = false;      // Estado de si el usuario sigue o no
+    const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual               
     // Función para mostrar la vista previa de los archivos seleccionados
-    function previewFiles() {
-        const fileInput = document.getElementById('fileInput');
+    function previewFiles() {                                                                                     const fileInput = document.getElementById('fileInput');
         const previewContainer = document.getElementById('filePreview');
 
         previewContainer.innerHTML = ''; // Limpiar vista previa anterior
@@ -501,9 +479,7 @@
                 fileElement.appendChild(video);
             }
 
-            previewContainer.appendChild(fileElement);
-        }
-    }
+            previewContainer.appendChild(fileElement);                                                            }                                                                                                     }
 
     // Publicar un Tweet con validación
     function publicar() {
@@ -604,8 +580,7 @@
 
         commentsSection.insertBefore(newComment, commentsSection.querySelector('.add-comment'));
 
-        // Limpiar el área de texto después de agregar el comentario
-        commentInput.value = "";
+        // Limpiar el área de texto después de agregar el comentario                                              commentInput.value = "";
     }
 
     // Abrir modal de perfil
@@ -665,7 +640,7 @@
 
         // Actualiza los contadores en la interfaz
         document.getElementById('followersCount').textContent = followersCount;
-        document.getElementById('followingCount').textContent = followingCount;                           
+        document.getElementById('followingCount').textContent = followingCount;
         // Cambia el estado de "seguir"
         isFollowing = !isFollowing;
     }
@@ -721,14 +696,11 @@
         if (!name || !username) {
             alert("¡Nombre y nombre de usuario son campos obligatorios!");
             return;
-        }
-
+        }                                                                                                 
         // Guardar los cambios
-        document.getElementById('nombrePerfil').innerText = name;
-        document.getElementById('usuarioPerfil').innerText = username;
+        document.getElementById('nombrePerfil').innerText = name;                                                 document.getElementById('usuarioPerfil').innerText = username;
         document.getElementById('bioPerfil').innerText = bio;
-        document.getElementById('locationPerfil').innerText = location;
-        document.getElementById('websitePerfil').innerText = website;
+        document.getElementById('locationPerfil').innerText = location;                                           document.getElementById('websitePerfil').innerText = website;
 
         // Actualizar avatar si se proporcionó una URL
         if (avatar) {
@@ -743,4 +715,4 @@
 
 </script>
 </body>
-    </html>
+</html>
