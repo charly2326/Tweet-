@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz Mejorada</title>
-    <style>
+<style>
         /* ======== ESTILOS GENERALES ======== */
         body {
             font-family: Arial, sans-serif;
@@ -19,8 +19,7 @@
             margin: auto;
         }
 
-        /* ======== MENÚ IZQUIERDO ======== */
-        .left-menu {
+        /* ======== MENÚ IZQUIERDO ======== */                                                                    .left-menu {
             width: 20%;
             padding: 20px;
             background: white;
@@ -65,8 +64,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             resize: none;
-            font-size: 16px;
-        }
+            font-size: 16px;                                                                                      }
 
         .new-post button {
             padding: 10px 20px;
@@ -88,16 +86,12 @@
 
         .post-header {
             display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            align-items: center;                                                                                      margin-bottom: 10px;
         }
-
-        .post-header .avatar {
-            width: 50px;
-            height: 50px;
+                                                                                                                  .post-header .avatar {
+            width: 50px;                                                                                              height: 50px;
             background: #ccc;
-            border-radius: 50%;
-            margin-right: 10px;
+            border-radius: 50%;                                                                                       margin-right: 10px;
             background-size: cover;
             background-position: center;
         }
@@ -122,9 +116,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            margin-right: 10px;
-            font-size: 16px;
-        }
+            margin-right: 10px;                                                                                       font-size: 16px;                                                                                      }
 
         /* ======== MENÚ DERECHO (TENDENCIAS) ======== */
         .right-menu {
@@ -205,8 +197,7 @@
         .comment-content h4 {
             margin: 0;
             font-size: 14px;
-            color: #1da1f2;
-        }
+            color: #1da1f2;                                                                             }
 
         .comment-content p {
             margin: 5px 0;
@@ -226,8 +217,7 @@
             font-size: 14px;
         }
 
-        .add-comment button {
-            padding: 5px 10px;
+        .add-comment button {                                                                               padding: 5px 10px;
             background: #1da1f2;
             color: white;
             border: none;
@@ -338,6 +328,23 @@
         .timeline-item p {
             margin: 0;
         }
+/* ======== MODAL DE EDICIÓN ======== */
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+}                                                                                                         
+.modal-content button {
+    padding: 10px 20px;                                                                                       background: #1da1f2;
+    color: white;
+    border: none;                                                                                             cursor: pointer;
+    border-radius: 20px;
+    margin-top: 10px;
+}
     </style>
 </head>
 <body>
@@ -399,46 +406,72 @@
         </div>
     </div>
 
-    <!-- MODAL DE PERFIL -->
-    <div class="modal" id="perfilModal" onclick="cerrarModalPerfil(event)">
-        <div class="modal-content">
-            <span class="close-btn" onclick="cerrarModalPerfil(event)">✖</span>
-            <div class="profile-avatar" id="avatarPerfil" style="background-image: url('avatar.jpg');"></div>
-            <div class="profile-name" id="nombrePerfil">Nombre del Usuario</div>
-            <div class="profile-username" id="usuarioPerfil">@usuario</div>
-            <p class="profile-bio" id="bioPerfil">Esta es la biografía del usuario.</p>
-            <button class="follow-btn" onclick="toggleFollow()">Seguir</button>
-            <div class="stats">
-                <div>
-                    <span id="tweetsCount">123</span>
-                    Tweets
-                </div>
-                <div>
-                    <span id="followingCount">456</span>
-                    Siguiendo
-                </div>
-                <div>
-                    <span id="followersCount">789</span>
-                    Seguidores
-                </div>
+<!-- MODAL DE PERFIL -->
+<div class="modal" id="perfilModal" onclick="cerrarModalPerfil(event)">
+    <div class="modal-content">
+        <span class="close-btn" onclick="cerrarModalPerfil(event)">✖</span>
+        <div class="profile-avatar" id="avatarPerfil" style="background-image: url('avatar.jpg');"></div>
+        <div class="profile-name" id="nombrePerfil">Nombre del Usuario</div>
+        <div class="profile-username" id="usuarioPerfil">@usuario</div>
+        <p class="profile-bio" id="bioPerfil">Esta es la biografía del usuario.</p>
+        <button class="follow-btn" onclick="toggleFollow()">Seguir</button>
+        <button class="edit-profile" onclick="abrirEditor()">Editar perfil</button>
+        <div class="stats">
+            <div>
+                <span id="tweetsCount">0</span>
+                Tweets
             </div>
-            <div class="timeline">
-                <h4>Timeline</h4>
-                <div class="timeline-item">
-                    <p>Primer Tweet</p>
-                </div>
-                <div class="timeline-item">
-                    <p>Segundo Tweet</p>
-                </div>
-                <!-- Otros tweets pueden ser añadidos aquí -->
+            <div>
+                <span id="followingCount">0</span>
+                Siguiendo
+            </div>
+            <div>
+                <span id="followersCount">0</span>
+                Seguidores
             </div>
         </div>
+        <div class="timeline">
+            <h4>Timeline</h4>
+            <div class="timeline-item">
+                <p>Primer Tweet</p>
+            </div>
+            <div class="timeline-item">
+                <p>Segundo Tweet</p>
+            </div>
+            <!-- Otros tweets pueden ser añadidos aquí -->
+        </div>
     </div>
+</div>
+<!-- MODAL DE EDICIÓN -->
+<div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="cerrarModalPerfil(event)">&times;</span>
+        <h2>Editar perfil</h2>
+        <label for="editName">Nombre:</label>
+        <input type="text" id="editName"><br><br>
+        <label for="editUsername">Nombre de usuario:</label>
+        <input type="text" id="editUsername"><br><br>
+        <label for="editBio">Bio:</label>
+        <textarea id="editBio"></textarea><br><br>
+        <label for="editLocation">Ubicación:</label>
+        <input type="text" id="editLocation"><br><br>
+        <label for="editWebsite">Sitio web:</label>
+        <input type="text" id="editWebsite"><br><br>
+        <!-- New input for avatar URL -->
+        <label for="editAvatar">URL del Avatar:</label>
+        <input type="text" id="editAvatar"><br><br>
+        <button onclick="guardarCambios()">Guardar cambios</button>
+        <button onclick="cerrarEditor()">Regresar</button>
 
-    <!-- Script para manejar el modal -->
-   <script>
+    </div>
+</div>
+
+<script>
     // Variables para seguimiento del estado de seguimiento
-    let isFollowing = false;
+    let tweetsCount = 123;        // Número inicial de tweets
+    let followersCount = 789;     // Número inicial de seguidores
+    let followingCount = 456;     // Número inicial de seguidos
+    let isFollowing = false;      // Estado de si el usuario sigue o no
     const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual
 
     // Función para mostrar la vista previa de los archivos seleccionados
@@ -488,7 +521,7 @@
         let postContent = `
             <div class="post-header">
                 <div class="avatar" style="background-image: url('avatar.jpg');"></div>
-                <h3 onclick="openUserProfile('@usuario')">@usuario</h3>
+                <h3 onclick="openUserProfile('${currentUsername}')">${currentUsername}</h3>
             </div>
             <p>${input}</p>
         `;
@@ -564,7 +597,7 @@
         newComment.innerHTML = `
             <div class="avatar" style="background-image: url('avatar.jpg');"></div>
             <div class="comment-content">
-                <h4>@usuario</h4>
+                <h4>${currentUsername}</h4>
                 <p>${commentText}</p>
             </div>
         `;
@@ -592,6 +625,7 @@
     function cerrarModalPerfil(event) {
         if (event.target.classList.contains('modal') || event.target.classList.contains('close-btn')) {
             document.getElementById("perfilModal").style.display = "none";
+            document.getElementById("edit-modal").style.display = "none";
         }
     }
 
@@ -607,13 +641,106 @@
         }
     }
 
-    // Función para seguir/dejar de seguir al usuario
+    // Función para actualizar los contadores en el modal del perfil
+    function actualizarPerfil() {
+        document.getElementById('tweetsCount').textContent = tweetsCount;
+        document.getElementById('followersCount').textContent = followersCount;
+        document.getElementById('followingCount').textContent = followingCount;
+    }
+
     function toggleFollow() {
         const followBtn = document.querySelector('.follow-btn');
+
+        if (isFollowing) {
+            // Deja de seguir
+            followersCount--;
+            followingCount--;
+            followBtn.textContent = 'Seguir';
+        } else {
+            // Comienza a seguir
+            followersCount++;
+            followingCount++;
+            followBtn.textContent = 'Siguiendo';
+        }
+
+        // Actualiza los contadores en la interfaz
+        document.getElementById('followersCount').textContent = followersCount;
+        document.getElementById('followingCount').textContent = followingCount;                           
+        // Cambia el estado de "seguir"
         isFollowing = !isFollowing;
-        followBtn.textContent = isFollowing ? 'Siguiendo' : 'Seguir';
-        followBtn.style.backgroundColor = isFollowing ? 'gray' : '#1da1f2';
     }
+
+    // Simulación de datos obtenidos de una API
+    function obtenerDatosDeAPI() {
+        // Simulamos la respuesta de una API
+        const apiData = {
+            tweetsCount: 1500,
+            followersCount: 1000,
+            followingCount: 500
+        };
+
+        // Actualizamos las variables
+        tweetsCount = apiData.tweetsCount;
+        followersCount = apiData.followersCount;
+        followingCount = apiData.followingCount;
+
+        // Luego actualizamos el perfil
+        actualizarPerfil();
+    }
+
+    // Llamar a la función para obtener los datos de la API
+    obtenerDatosDeAPI();
+
+    // Abrir modal de edición
+    function abrirEditor() {
+        document.getElementById('edit-modal').style.display = 'flex';
+
+        // Cargar datos en el formulario                                                                          document.getElementById('editName').value = document.getElementById('nombrePerfil').innerText;
+        document.getElementById('editUsername').value = document.getElementById('usuarioPerfil').innerText;
+        document.getElementById('editBio').value = document.getElementById('bioPerfil').innerText;
+        document.getElementById('editLocation').value = document.getElementById('locationPerfil').innerText;
+        document.getElementById('editWebsite').value = document.getElementById('websitePerfil').innerText;
+        document.getElementById('editAvatar').value = document.getElementById('avatarPerfil').style.backgroundImage.slice(5, -2);
+    }
+
+    // Cerrar modal de edición
+    function cerrarEditor() {
+        document.getElementById('edit-modal').style.display = 'none';
+    }
+
+    // Guardar cambios
+    function guardarCambios() {
+        let name = document.getElementById('editName').value.trim();
+        let username = document.getElementById('editUsername').value.trim();
+        let bio = document.getElementById('editBio').value.trim();
+        let location = document.getElementById('editLocation').value.trim();
+        let website = document.getElementById('editWebsite').value.trim();
+        let avatar = document.getElementById('editAvatar').value.trim();
+
+        // Validar campos obligatorios
+        if (!name || !username) {
+            alert("¡Nombre y nombre de usuario son campos obligatorios!");
+            return;
+        }
+
+        // Guardar los cambios
+        document.getElementById('nombrePerfil').innerText = name;
+        document.getElementById('usuarioPerfil').innerText = username;
+        document.getElementById('bioPerfil').innerText = bio;
+        document.getElementById('locationPerfil').innerText = location;
+        document.getElementById('websitePerfil').innerText = website;
+
+        // Actualizar avatar si se proporcionó una URL
+        if (avatar) {
+            document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
+        }
+
+        // Cerrar modal después de guardar los cambios
+        cerrarEditor();
+    }
+
+
+
 </script>
 </body>
-</html>
+    </html>
