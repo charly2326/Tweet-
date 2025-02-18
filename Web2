@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -106,58 +107,8 @@ body {
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 20px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.post-header .avatar {
-    width: 50px;
-    height: 50px;
-    background: #ccc;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-size: cover;
-    background-position: center;
-}
-
-.post-header h3 {
-    margin: 0;
-    color: #1da1f2;
-    cursor: pointer;
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
-
-.post-header h3:hover {
-    color: #0d8cd1;
-}
-
-.post img {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.post-actions {
-    margin-top: 10px;
-}
-
-.post-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 16px;
-    transition: color 0.3s ease;
-}
-
-.post-actions button:hover {
+    padding: 15px;                                                                                              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);                                                               }                                                                                                                                                                                                                       .post-header {                                                                                                  display: flex;                                                                                              align-items: center;                                                                                        margin-bottom: 10px;                                                                                    }                                                                                                                                                                                                                       .post-header .avatar {                                                                                          width: 50px;                                                                                                height: 50px;                                                                                               background: #ccc;                                                                                           border-radius: 50%;                                                                                         margin-right: 10px;                                                                                         background-size: cover;                                                                                     background-position: center;                                                                            }                                                                                                                                                                                                                       .post-header h3 {                                                                                               margin: 0;                                                                                                  color: #1da1f2;                                                                                             cursor: pointer;                                                                                            font-size: 18px;                                                                                            transition: color 0.3s ease;                                                                            }                                                                                                                                                                                                                       .post-header h3:hover {                                                                                         color: #0d8cd1;                                                                                         }                                                                                                                                                                                                                       .post img {                                                                                                     width: 100%;                                                                                                border-radius: 10px;                                                                                        margin-top: 10px;                                                                                       }                                                                                                                                                                                                                       .post-actions {                                                                                                 margin-top: 10px;                                                                                       }                                                                                                                                                                                                                       .post-actions button {                                                                                          background: none;                                                                                           border: none;                                                                                               cursor: pointer;                                                                                            margin-right: 10px;                                                                                         font-size: 16px;
+    transition: color 0.3s ease;                                                                            }                                                                                                                                                                                                                       .post-actions button:hover {
     color: #1da1f2;
 }
 
@@ -352,21 +303,17 @@ body {
     border-radius: 20px;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
+    margin-top: 10px;                                                                                           transition: background-color 0.3s ease;
 }
-
-.follow-btn:hover {
+                                                                                                            .follow-btn:hover {
     background-color: #0d8cd1;
 }
 
 .stats {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    justify-content: space-around;                                                                              margin-top: 20px;
 }
-
-.stats div {
+                                                                                                            .stats div {
     text-align: center;
 }
 
@@ -382,8 +329,7 @@ body {
 }
 
 .timeline h4 {
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin-bottom: 10px;                                                                                        font-size: 18px;
 }
 
 .timeline-item {
@@ -411,8 +357,7 @@ body {
 .modal-content button {
     padding: 10px 20px;
     background: #1da1f2;
-    color: white;
-    border: none;
+    color: white;                                                                                               border: none;
     cursor: pointer;
     border-radius: 20px;
     margin-top: 10px;
@@ -427,23 +372,19 @@ body {
 @media (max-width: 768px) {
     /* Cambiar la disposición a columna en pantallas pequeñas */
     .container {
-        flex-direction: column;
-    }
+        flex-direction: column;                                                                                 }
 
     .left-menu, .right-menu {
         width: 100%;
         padding: 10px;
         display: none; /* Ocultar menús laterales en móviles */
-    }
-
+    }                                                                                                       
     .feed {
         width: 100%;
         padding: 10px;
-    }
-
+    }                                                                                                       
     /* Menú inferior fijo en móviles */
-    .bottom-menu {
-        display: flex;
+    .bottom-menu {                                                                                                  display: flex;
         justify-content: space-around;
         background: white;
         position: fixed;
@@ -468,9 +409,7 @@ body {
 
     </style>
 </head>
-<body>
-    <!-- Contenedor Principal -->
-    <div class="container">
+<body>                                                                                                          <!-- Contenedor Principal -->                                                                               <div class="container">
         <!-- Menú Izquierdo -->
 <div class="left-menu">
     <nav>
@@ -502,8 +441,7 @@ body {
                 </div>
                 <p>Este es un ejemplo de publicación.</p>
                 <img src="https://via.placeholder.com/600x400" alt="Post Image">
-                <div class="post-actions">
-                    <button onclick="toggleComments(this)">💬 Comentar</button>
+                <div class="post-actions">                                                                                      <button onclick="toggleComments(this)">💬 Comentar</button>
                     <button>❤️</button>
                     <button>📤</button>
                 </div>
@@ -514,15 +452,13 @@ body {
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>                                                                                              
         <!-- Menú Derecho (Tendencias) -->
         <div class="right-menu">
             <h3>Tendencias</h3>
             <ul id="trendingList">                                                                                        <li>#Tendencia1</li>
                 <li>#Tendencia2</li>
-                <li>#Tendencia3</li>
-            </ul>
+                <li>#Tendencia3</li>                                                                                    </ul>
         </div>
     </div>
 
@@ -539,16 +475,14 @@ body {
         <div class="stats">
             <div>
                 <span id="tweetsCount">0</span>
-                Tweets
-            </div>
+                Tweets                                                                                                  </div>
             <div>
                 <span id="followingCount">0</span>
                 Siguiendo
             </div>
             <div>
                 <span id="followersCount">0</span>
-                Seguidores
-            </div>
+                Seguidores                                                                                              </div>
         </div>
         <div class="timeline">
             <h4>Timeline</h4>
@@ -569,9 +503,7 @@ body {
         <label for="editName">Nombre:</label>
         <input type="text" id="editName"><br><br>
         <label for="editUsername">Nombre de usuario:</label>
-        <input type="text" id="editUsername"><br><br>
-        <label for="editBio">Bio:</label>
-        <textarea id="editBio"></textarea><br><br>
+        <input type="text" id="editUsername"><br><br>                                                               <label for="editBio">Bio:</label>                                                                           <textarea id="editBio"></textarea><br><br>
         <label for="editLocation">Ubicación:</label>
         <input type="text" id="editLocation"><br><br>
         <label for="editWebsite">Sitio web:</label>
@@ -668,8 +600,7 @@ function publicar() {
     // Añadir acciones al post
     postContent += `
         <div class="post-actions">
-            <button onclick="toggleComments(this)">💬 Comentar</button>
-            <button>❤️</button>
+            <button onclick="toggleComments(this)">💬 Comentar</button>                                                 <button>❤️</button>
             <button>📤</button>
         </div>
         <div class="comments" style="display: none;">
@@ -686,11 +617,9 @@ function publicar() {
     // Limpiar el formulario después de publicar
     document.getElementById("postText").value = "";
     document.getElementById("filePreview").innerHTML = "";
-    document.getElementById("fileInput").value = "";
-}
+    document.getElementById("fileInput").value = "";                                                        }
 
-// Función para procesar imágenes o videos
-function procesarArchivo() {
+// Función para procesar imágenes o videos                                                                  function procesarArchivo() {
     const fileInput = document.getElementById('fileInput');
     if (fileInput.files.length === 0) return "";
 
@@ -744,8 +673,7 @@ function eliminarComentario(commentElement) {
 
     // Abrir modal de perfil
     function openProfileModal() {
-        document.getElementById("perfilModal").style.display = "flex";
-        // Verificar si el perfil es del usuario actual
+        document.getElementById("perfilModal").style.display = "flex";                                              // Verificar si el perfil es del usuario actual
         const profileUsername = document.getElementById("usuarioPerfil").innerText;
         const perfilBtn = document.getElementById("perfilBtn");
         if (profileUsername === currentUsername) {
@@ -790,8 +718,7 @@ function eliminarComentario(commentElement) {
     if (username) document.getElementById('usuarioPerfil').innerText = username;
     if (bio) document.getElementById('bioPerfil').innerText = bio;
     if (location) document.getElementById('locationPerfil').innerText = location;
-    if (website) document.getElementById('websitePerfil').innerText = website;
-    if (avatar) document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
+    if (website) document.getElementById('websitePerfil').innerText = website;                                  if (avatar) document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
 }
 // Llamar a la función para cargar los datos del perfil desde localStorage
 window.onload = function() {
@@ -799,29 +726,33 @@ window.onload = function() {
 };
 
 
-   function toggleFollow() {
-    const followBtn = document.querySelector('.follow-btn');
-    const profileUsername = document.getElementById("usuarioPerfil").innerText;
+  // Obtener el nombre de usuario del perfil que se está visualizando
+const profileUsername = document.getElementById("usuarioPerfil").innerText;
 
-    // Obtener los amigos seguidos de localStorage
-    let followedProfiles = JSON.parse(localStorage.getItem('followedProfiles')) || [];
+// Obtener los perfiles seguidos de localStorage
+let followedProfiles = JSON.parse(localStorage.getItem('followedProfiles')) || [];
+
+// Verificar si el perfil está siendo seguido o no
+let isFollowing = followedProfiles.includes(profileUsername);
+
+// Función para cambiar el estado de seguimiento
+function toggleFollow() {
+    const followBtn = document.querySelector('.follow-btn');
 
     if (isFollowing) {
-        // Deja de seguir
-        followedProfiles = followedProfiles.filter(username => username !== profileUsername);
+        // Deja de seguir                                                                                           followedProfiles = followedProfiles.filter(username => username !== profileUsername);
         followBtn.textContent = 'Seguir';
-    } else {
-        // Comienza a seguir
+    } else {                                                                                                        // Comienza a seguir
         followedProfiles.push(profileUsername);
         followBtn.textContent = 'Siguiendo';
-    }
-
+    }                                                                                                       
     // Guardar los perfiles seguidos en localStorage
     localStorage.setItem('followedProfiles', JSON.stringify(followedProfiles));
 
     // Cambiar el estado de "seguir"
     isFollowing = !isFollowing;
 }
+
 
 function mostrarAmigos() {
     // Obtener los perfiles seguidos de localStorage
@@ -839,9 +770,7 @@ function mostrarAmigos() {
     });
 }
 
-
-    // Simulación de datos obtenidos de una API
-    function obtenerDatosDeAPI() {
+                                                                                                                // Simulación de datos obtenidos de una API                                                                 function obtenerDatosDeAPI() {
         // Simulamos la respuesta de una API
         const apiData = {
             tweetsCount: 1500,
@@ -910,11 +839,9 @@ function mostrarAmigos() {
 
     // Actualizar avatar si se proporcionó una URL
     if (avatar) {
-        document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
-    }
+        document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;                       }
 
-    // Cerrar modal después de guardar los cambios
-    cerrarEditor();
+    // Cerrar modal después de guardar los cambios                                                              cerrarEditor();
 }
 
 
@@ -949,8 +876,7 @@ function openFriendsModal() {
     document.getElementById("friendsModal").style.display = "block";
     mostrarAmigos(); // Mostrar amigos cuando se abra el modal
 }
-
-// Función para cerrar el modal de amigos
+                                                                                                            // Función para cerrar el modal de amigos
 function cerrarModalFriends() {
     document.getElementById("friendsModal").style.display = "none";
 }
