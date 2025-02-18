@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +11,8 @@
             margin: 0;
             padding: 0;                                                                                               background: #f5f8fa;
         }
-                                                                                                                  .container {
+
+      .container {
             display: flex;
             max-width: 1200px;
             margin: auto;                                                                                         }
@@ -82,7 +84,8 @@
             display: flex;
             align-items: center;                                                                                      margin-bottom: 10px;
         }
-                                                                                                                  .post-header .avatar {
+
+      .post-header .avatar {
             width: 50px;                                                                                              height: 50px;
             background: #ccc;
             border-radius: 50%;                                                                                       margin-right: 10px;
@@ -285,7 +288,8 @@
             justify-content: space-around;
             margin-top: 20px;
         }
-                                                                                                                  .stats div {
+
+      .stats div {
             text-align: center;
         }
 
@@ -304,11 +308,12 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
-                                                                                                                  .timeline-item {
+
+      .timeline-item {
             background: #f5f8fa;
             padding: 10px;                                                                                            margin-bottom: 10px;
             border-radius: 10px;
-        }                                                                                                 
+        }
         .timeline-item p {
             margin: 0;
         }
@@ -452,7 +457,7 @@
     // Variables para seguimiento del estado de seguimiento                                                   let tweetsCount = 123;        // Número inicial de tweets
     let followersCount = 789;     // Número inicial de seguidores
     let followingCount = 456;     // Número inicial de seguidos                                               let isFollowing = false;      // Estado de si el usuario sigue o no
-    const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual               
+    const currentUsername = '@mi_usuario'; // Cambia este valor al nombre de usuario actual
     // Función para mostrar la vista previa de los archivos seleccionados
     function previewFiles() {                                                                                     const fileInput = document.getElementById('fileInput');
         const previewContainer = document.getElementById('filePreview');
@@ -482,73 +487,80 @@
             previewContainer.appendChild(fileElement);                                                            }                                                                                                     }
 
     // Publicar un Tweet con validación
-    function publicar() {
-        let input = document.getElementById("postText").value.trim();
-        if (input === "") {
-            alert("¡El post no puede estar vacío!");
-            return;
-        }
-
-        let feed = document.querySelector(".feed");
-        let newPost = document.createElement("div");
-        newPost.classList.add("post");
-
-        // Crear el contenido del post
-        let postContent = `
-            <div class="post-header">
-                <div class="avatar" style="background-image: url('avatar.jpg');"></div>
-                <h3 onclick="openUserProfile('${currentUsername}')">${currentUsername}</h3>
-            </div>
-            <p>${input}</p>
-        `;
-
-        // Añadir la imagen si hay archivos seleccionados
-        const fileInput = document.getElementById('fileInput');
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            const fileType = file.type.split('/')[0]; // Tipo de archivo (imagen, video, etc.)
-
-            if (fileType === 'image') {
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.style.width = '100%';
-                img.style.borderRadius = '10px';
-                img.style.marginTop = '10px';
-                postContent += img.outerHTML;
-            } else if (fileType === 'video') {
-                const video = document.createElement('video');
-                video.src = URL.createObjectURL(file);
-                video.controls = true;
-                video.style.width = '100%';
-                video.style.borderRadius = '10px';
-                video.style.marginTop = '10px';
-                postContent += video.outerHTML;
-            }
-        }
-
-        // Añadir acciones al post
-        postContent += `
-            <div class="post-actions">
-                <button onclick="toggleComments(this)">💬 Comentar</button>
-                <button>❤️</button>
-                <button>📤</button>
-            </div>
-            <div class="comments" style="display: none;">
-                <div class="add-comment">
-                    <textarea class="comment-input" placeholder="Escribe un comentario..."></textarea>
-                    <button onclick="agregarComentario(this)">Comentar</button>
-                </div>
-            </div>
-        `;
-
-        newPost.innerHTML = postContent;
-        feed.appendChild(newPost);
-
-        // Limpiar el formulario después de publicar
-        document.getElementById("postText").value = "";
-        document.getElementById("filePreview").innerHTML = "";
-        fileInput.value = ""; // Limpiar el input de archivos
+function publicar() {
+    let input = document.getElementById("postText").value.trim();
+    if (input === "") {
+        alert("¡El post no puede estar vacío!");
+        return;
     }
+
+    // Obtener el nombre de usuario desde localStorage
+    let currentUsername = localStorage.getItem("username");
+
+    // Si el usuario no tiene nombre, pedirlo
+    if (!currentUsername) {
+        currentUsername = prompt("Introduce tu nombre de usuario único:");
+        while (!currentUsername || currentUsername.trim() === "") {
+            currentUsername = prompt("El nombre no puede estar vacío. Introduce tu nombre de usuario:");
+        }
+        localStorage.setItem("username", currentUsername);
+    }
+
+    let feed = document.querySelector(".feed");
+    let newPost = document.createElement("div");
+    newPost.classList.add("post");
+
+    // Crear el contenido del post
+    let postContent = `
+        <div class="post-header">
+            <div class="avatar" style="background-image: url('avatar.jpg');"></div>
+            <h3 onclick="openUserProfile('${currentUsername}')">${currentUsername}</h3>
+        </div>
+        <p>${input}</p>
+    `;
+
+    // Añadir la imagen o video si hay archivos seleccionados
+    postContent += procesarArchivo();
+
+    // Añadir acciones al post
+    postContent += `
+        <div class="post-actions">
+            <button onclick="toggleComments(this)">💬 Comentar</button>
+            <button>❤️</button>
+            <button>📤</button>
+        </div>
+        <div class="comments" style="display: none;">
+            <div class="add-comment">
+                <textarea class="comment-input" placeholder="Escribe un comentario..."></textarea>
+                <button onclick="agregarComentario(this)">Comentar</button>
+            </div>
+        </div>
+    `;
+
+    newPost.innerHTML = postContent;
+    feed.appendChild(newPost);
+
+    // Limpiar el formulario después de publicar
+    document.getElementById("postText").value = "";
+    document.getElementById("filePreview").innerHTML = "";
+    document.getElementById("fileInput").value = "";
+}
+
+// Función para procesar imágenes o videos
+function procesarArchivo() {
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length === 0) return "";
+
+    const file = fileInput.files[0];
+    const fileType = file.type.split('/')[0]; // Tipo de archivo (image, video)
+
+    if (fileType === 'image') {
+        return `<img src="${URL.createObjectURL(file)}" style="width: 100%; border-radius: 10px; margin-top: 10px;">`;
+    } else if (fileType === 'video') {
+        return `<video src="${URL.createObjectURL(file)}" controls style="width: 100%; border-radius: 10px; margin-top: 10px;"></video>`;
+    }
+    return "";
+}
 
     // Función para mostrar/ocultar comentarios
     function toggleComments(button) {
@@ -696,7 +708,7 @@
         if (!name || !username) {
             alert("¡Nombre y nombre de usuario son campos obligatorios!");
             return;
-        }                                                                                                 
+        }
         // Guardar los cambios
         document.getElementById('nombrePerfil').innerText = name;                                                 document.getElementById('usuarioPerfil').innerText = username;
         document.getElementById('bioPerfil').innerText = bio;
@@ -710,9 +722,34 @@
         // Cerrar modal después de guardar los cambios
         cerrarEditor();
     }
+// Verificar si ya existe un ID único para este dispositivo
+let deviceID = localStorage.getItem("deviceID");
+
+if (!deviceID) {
+    // Si no existe, generar uno nuevo
+    deviceID = crypto.randomUUID();
+    localStorage.setItem("deviceID", deviceID);
+}
+
+// Verificar si ya existe un nombre de usuario para este dispositivo
+let username = localStorage.getItem("username");
+
+if (!username) {
+    username = prompt("Introduce tu nombre de usuario único:");
+
+    // Asegurar que el usuario ingrese algo
+    while (!username || username.trim() === "") {
+        username = prompt("El nombre no puede estar vacío. Introduce tu nombre de usuario:");
+    }
+
+    localStorage.setItem("username", username);
+}
+
+// Mostrar el nombre de usuario en la página
+document.getElementById("usernameDisplay").innerText = `Usuario: ${username}`;
 
 
 
 </script>
 </body>
-</html>
+                                                                        </html>
