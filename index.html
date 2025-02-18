@@ -595,6 +595,10 @@ function procesarArchivo() {
         // Limpiar el área de texto después de agregar el comentario                                              commentInput.value = "";
     }
 
+function eliminarComentario(commentElement) {
+    commentElement.remove();
+}
+
     // Abrir modal de perfil
     function openProfileModal() {
         document.getElementById("perfilModal").style.display = "flex";
@@ -630,10 +634,27 @@ function procesarArchivo() {
 
     // Función para actualizar los contadores en el modal del perfil
     function actualizarPerfil() {
-        document.getElementById('tweetsCount').textContent = tweetsCount;
-        document.getElementById('followersCount').textContent = followersCount;
-        document.getElementById('followingCount').textContent = followingCount;
-    }
+    // Cargar los datos del perfil desde localStorage
+    const name = localStorage.getItem('name');
+    const username = localStorage.getItem('username');
+    const bio = localStorage.getItem('bio');
+    const location = localStorage.getItem('location');
+    const website = localStorage.getItem('website');
+    const avatar = localStorage.getItem('avatar');
+
+    // Actualizar los elementos del perfil en la interfaz
+    if (name) document.getElementById('nombrePerfil').innerText = name;
+    if (username) document.getElementById('usuarioPerfil').innerText = username;
+    if (bio) document.getElementById('bioPerfil').innerText = bio;
+    if (location) document.getElementById('locationPerfil').innerText = location;
+    if (website) document.getElementById('websitePerfil').innerText = website;
+    if (avatar) document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
+}
+// Llamar a la función para cargar los datos del perfil desde localStorage
+window.onload = function() {
+    actualizarPerfil();
+};
+
 
     function toggleFollow() {
         const followBtn = document.querySelector('.follow-btn');
@@ -697,31 +718,44 @@ function procesarArchivo() {
 
     // Guardar cambios
     function guardarCambios() {
-        let name = document.getElementById('editName').value.trim();
-        let username = document.getElementById('editUsername').value.trim();
-        let bio = document.getElementById('editBio').value.trim();
-        let location = document.getElementById('editLocation').value.trim();
-        let website = document.getElementById('editWebsite').value.trim();
-        let avatar = document.getElementById('editAvatar').value.trim();
+    let name = document.getElementById('editName').value.trim();
+    let username = document.getElementById('editUsername').value.trim();
+    let bio = document.getElementById('editBio').value.trim();
+    let location = document.getElementById('editLocation').value.trim();
+    let website = document.getElementById('editWebsite').value.trim();
+    let avatar = document.getElementById('editAvatar').value.trim();
 
-        // Validar campos obligatorios
-        if (!name || !username) {
-            alert("¡Nombre y nombre de usuario son campos obligatorios!");
-            return;
-        }
-        // Guardar los cambios
-        document.getElementById('nombrePerfil').innerText = name;                                                 document.getElementById('usuarioPerfil').innerText = username;
-        document.getElementById('bioPerfil').innerText = bio;
-        document.getElementById('locationPerfil').innerText = location;                                           document.getElementById('websitePerfil').innerText = website;
-
-        // Actualizar avatar si se proporcionó una URL
-        if (avatar) {
-            document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
-        }
-
-        // Cerrar modal después de guardar los cambios
-        cerrarEditor();
+    // Validar campos obligatorios
+    if (!name || !username) {
+        alert("¡Nombre y nombre de usuario son campos obligatorios!");
+        return;
     }
+
+    // Guardar los cambios en localStorage
+    localStorage.setItem('name', name);
+    localStorage.setItem('username', username);
+    localStorage.setItem('bio', bio);
+    localStorage.setItem('location', location);
+    localStorage.setItem('website', website);
+    localStorage.setItem('avatar', avatar);
+
+    // Actualizar los datos en la interfaz
+    document.getElementById('nombrePerfil').innerText = name;
+    document.getElementById('usuarioPerfil').innerText = username;
+    document.getElementById('bioPerfil').innerText = bio;
+    document.getElementById('locationPerfil').innerText = location;
+    document.getElementById('websitePerfil').innerText = website;
+
+    // Actualizar avatar si se proporcionó una URL
+    if (avatar) {
+        document.getElementById('avatarPerfil').style.backgroundImage = `url(${avatar})`;
+    }
+
+    // Cerrar modal después de guardar los cambios
+    cerrarEditor();
+}
+
+
 // Verificar si ya existe un ID único para este dispositivo
 let deviceID = localStorage.getItem("deviceID");
 
@@ -752,4 +786,4 @@ document.getElementById("usernameDisplay").innerText = `Usuario: ${username}`;
 
 </script>
 </body>
-                                                                        </html>
+</html>
